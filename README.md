@@ -6,16 +6,16 @@
 ## Team Information
 
 - **Name**: John Doe
-- **Email**: john.doe@sjsu.edu
-- **Student ID**: 12345678
+-- **Email**: john.doe@sjsu.edu
+-- **Student ID**: 12345678
 
 - **Name**: John Doe
-- **Email**: john.doe@sjsu.edu
-- **Student ID**: 12345678
+-- **Email**: john.doe@sjsu.edu
+-- **Student ID**: 12345678
 
 - **Name**: John Doe
-- **Email**: john.doe@sjsu.edu
-- **Student ID**: 12345678
+-- **Email**: john.doe@sjsu.edu
+-- **Student ID**: 12345678
 
 ## Assignment Information
 - **Assignment**: Programming Assignment #1

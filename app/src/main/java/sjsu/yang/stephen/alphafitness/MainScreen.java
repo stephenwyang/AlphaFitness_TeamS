@@ -1,52 +1,122 @@
 package sjsu.yang.stephen.alphafitness;
 
+import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class MainScreen extends AppCompatActivity {
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
+
+public class MainScreen extends AppCompatActivity implements OnMapReadyCallback{
+
+    private GoogleMap gMap;
+    private boolean isWorkOut = false;
+    private Button workout;
+    private TextView timeView;
+    int s, m, ms;
+    long msTime, startTime, timeBuff, updateTime = 0L;
+    private long steps;
+
+    private TextView distanceView;
+
+    SensorManager sensManager;
+    Sensor stepSense;
+    Handler h;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        //Setup Button/View
+        workout = (Button) findViewById(R.id.workoutButton);
+        timeView = (TextView) findViewById(R.id.timeView);
+        distanceView =  (TextView) findViewById(R.id.distanceView);
+
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main_screen, menu);
-        return true;
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    //Click on the button, go to the profile page
+    public void goToUserProf(View view) {
+        //Intent intent = new Intent(this, profile.class)
+        //startActivity(intent)
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public void workoutButtonClicked(View view) {
+        if(!isWorkOut) {
+            //Reset all the data if you aren't working out
+            msTime = 0L;
+            startTime = 0L;
+            timeBuff = 0L;
+            updateTime = 0L;
+            s = 0;
+            m = 0;
+            ms = 0;
+            steps = 0;
+
+            //Change the text
+            workout.setText("STOP WORKOUT");
+            workout.setBackgroundColor(Color.RED);
+            workout.setTextColor(Color.WHITE);
+
+            isWorkOut = true;
+
+            //Set the start time for the clock
+            startTime = SystemClock.uptimeMillis();
+            //Other things
+            h.postDelayed(updateStuffRun, 0);
+
+        }
+        else {
+            //Set button back to normal
+            workout.setText("START WORKOUT");
+            workout.setBackgroundColor(Color.WHITE);
+            workout.setTextColor(Color.BLACK);
+
+            isWorkOut = false;
+
+            //Put the workout inside the DB, etc.
         }
 
-        return super.onOptionsItemSelected(item);
+    }
+
+    public Runnable updateStuffRun = new Runnable() {
+        public void run() {
+            msTime = SystemClock.uptimeMillis();
+            updateTime = timeBuff + msTime;
+            s = (int) (updateTime / 1000);
+            m = s / 60;
+            s = s % 60;
+            ms = (int) (updateTime % 1000);
+            timeView.setText(m + ":" + String.format("%02d", s) + ":" + String.format("%03d", ms));
+            distanceView.setText(String.format(java.util.Locale.US, "%.2f", getDistance()));
+            h.postDelayed(this, 0 );
+        }
+        };
+
+    //Do this later, need to calculate distance walken
+    public Object getDistance() {
+        return 0;
     }
 }
+
+
+

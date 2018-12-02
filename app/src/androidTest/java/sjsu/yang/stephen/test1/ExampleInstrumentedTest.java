@@ -1,4 +1,4 @@
-package sjsu.yang.stephen.alphafitness;
+package sjsu.yang.stephen.test1;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("sjsu.yang.stephen.alphafitness", appContext.getPackageName());
+        assertEquals("sjsu.yang.stephen.test1", appContext.getPackageName());
     }
 }

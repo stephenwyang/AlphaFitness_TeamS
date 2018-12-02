@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "sjsu.yang.stephen.alphafitness"
+        applicationId "sjsu.yang.stephen.test1"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -19,8 +19,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:design:28.0.0'

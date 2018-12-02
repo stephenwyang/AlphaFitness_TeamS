@@ -17,16 +17,14 @@
             android:layout_width="290dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="TextView"
             android:textSize="32sp"
-            tools:text="Recording Workout" />
+            android:text="Recording Workout" />
 
         <ImageButton
             android:id="@+id/profileButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="goToUserProf"
             app:srcCompat="@android:drawable/sym_def_app_icon" />
     </LinearLayout>
 
@@ -41,9 +39,8 @@
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="TextView"
             android:textSize="32sp"
-            tools:text="Distance" />
+            android:text="Distance" />
 
         <TextView
             android:id="@+id/textView2"
@@ -52,8 +49,7 @@
             android:gravity="center"
             android:layout_weight="1"
             android:textSize="32sp"
-            android:text="TextView"
-            tools:text = "Duration"/>
+            android:text = "Duration"/>
     </LinearLayout>
 
     <LinearLayout
@@ -67,9 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView"
             android:textSize="32sp"
-            tools:text="0.00" />
+            android:text="0.00" />
 
         <TextView
             android:id="@+id/timeView"
@@ -77,9 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView"
             android:textSize="32sp"
-            tools:text="0:00:00" />
+            android:text="0:00:00" />
 
     </LinearLayout>
 
@@ -126,8 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="workoutButtonClicked"
-            android:text="Button"
-            tools:text="START WORKOUT" />
+            android:text="START WORKOUT" />
     </LinearLayout>
 
 </LinearLayout>

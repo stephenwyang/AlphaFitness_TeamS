@@ -1,4 +1,4 @@
-package sjsu.yang.stephen.alphafitness;
+package sjsu.yang.stephen.test1;
 
 import org.junit.Test;
 

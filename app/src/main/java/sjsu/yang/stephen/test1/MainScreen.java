@@ -1,5 +1,6 @@
 package sjsu.yang.stephen.test1;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 public class MainScreen extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap gMap;
+
+    //Storing user information and such
 
     private boolean isWorkOut = false;
     //UI elements
@@ -43,6 +46,8 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback 
         timeView = (TextView) findViewById(R.id.timeView);
         distanceView = (TextView) findViewById(R.id.distanceView);
 
+        //Database stuff
+
         //Switch to detail if you change the orientation
         /*
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -57,7 +62,14 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback 
     }
 
     public void onMapReady(GoogleMap googleMap) {
+        gMap = googleMap;
 
+    }
+
+    //Button click methods
+    public void onUserButtonClicked(View view) {
+        Intent intent = new Intent(this, UserProfile.class);
+        startActivity(intent);
     }
 
     public void workoutButtonClicked(View view) {

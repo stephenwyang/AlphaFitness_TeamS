@@ -6,9 +6,7 @@
 ## Team Information
 
 - **Name**: Stephen Yang
-
 -- **Email**: stephen.yang@sjsu.edu
-
 -- **Student ID**: 010644777
 
 ## Assignment Information

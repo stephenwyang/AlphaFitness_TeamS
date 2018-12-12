@@ -37,6 +37,7 @@ public class User {
     public void setuWeight(float f) {
         uWeight = f;
     }
+    public void setuID(long l) { uID = l; }
 
 
 }

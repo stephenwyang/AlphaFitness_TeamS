@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserProfile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher" />
+
+        <EditText
+            android:id="@+id/uName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Your Name"
+            android:layout_marginTop = "15dp"
+            android:textSize="32sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/genderSpinner"
+            android:entries="@array/gender">
+
+        </Spinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userWeight"
+            android:inputType="numberDecimal"
+            android:text="160"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="lbs"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/heading1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AVERAGE / WEEKLY"
+        android:textSize="32sp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
+        <TableRow>
+            <TextView
+                android:text="Distance"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+            <TextView
+                android:text="0.0 Km"
+                android:gravity="right"
+                android:id="@+id/userDistanceAvg"
+                android:textSize="18sp"
+                android:padding="3dip" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Time"
+                android:textSize="18sp"
+                android:padding="3dip" />
+            <TextView
+                android:text="0:00:00"
+                android:gravity="right"
+                android:id="@+id/timeAvg"
+                android:textSize="18sp"
+                android:padding="3dip" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Workout"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+            <TextView
+                android:text="0 Times"
+                android:gravity="right"
+                android:id="@+id/workoutCountAvg"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Calories Burnt"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+            <TextView
+                android:text="1000 Cal"
+                android:gravity="right"
+                android:id="@+id/caloriesAvg"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TOTAL"
+        android:textSize="32sp"
+        />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+        <TableRow>
+            <TextView
+                android:text="Distance"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+            <TextView
+                android:text="0.0 Km"
+                android:gravity="right"
+                android:id="@+id/userDistanceAll"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Time"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+            <TextView
+                android:text="0:00:00"
+                android:gravity="right"
+                android:id="@+id/timeAll"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Workout"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+            <TextView
+                android:text="0 Times"
+                android:gravity="right"
+                android:id="@+id/workoutCountAll"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Calories Burnt"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+            <TextView
+                android:text="1000 Cal"
+                android:id="@+id/caloriesAll"
+                android:gravity="right"
+                android:padding="3dip"
+                android:textSize="18sp"/>
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

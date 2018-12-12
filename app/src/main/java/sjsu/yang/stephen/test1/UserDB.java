@@ -11,17 +11,17 @@ public class UserDB extends SQLiteOpenHelper {
     private static final int DB_VER = 1;
 
     //DB components
-    private static final String TB_NAME = "users";
-    private static final String colID = "uID";
-    private static final String colName = "uName";
-    private static final String colGen = "gender";
-    private static final String colWeight = "weight";
+    static final String TB_NAME = "users";
+    static final String colID = "uID";
+    static final String colName = "uName";
+    static final String colGen = "gender";
+    static final String colWeight = "weight";
 
-    private static final String TB_NAME_2 = "workouts";
-    private static final String colDist = "workDist";
-    private static final String colTime = "workTime";
-    private static final String colCalories = "workCalories";
-    private static final String colDate = "workoutDate";
+    static final String TB_NAME_2 = "workouts";
+    static final String colDist = "workDist";
+    static final String colTime = "workTime";
+    static final String colCalories = "workCalories";
+    static final String colDate = "workoutDate";
 
     private static final String USER_TABLE = " CREATE TABLE " + TB_NAME + " " +
             "(" + colID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -51,5 +51,7 @@ public class UserDB extends SQLiteOpenHelper {
         db.execSQL(USER_TABLE);
         db.execSQL(DATA_TABLE);
     }
+
+
 }
 

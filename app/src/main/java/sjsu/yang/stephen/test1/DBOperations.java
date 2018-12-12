@@ -1,0 +1,46 @@
+package sjsu.yang.stephen.test1;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DBOperations {
+    private final SQLiteOpenHelper dbhelper;
+    private SQLiteDatabase db;
+
+    public DBOperations(Context context) {
+        dbhelper = new UserDB(context);
+    }
+
+    public void open() {
+        db = dbhelper.getWritableDatabase();
+    }
+
+    public void close() {
+        dbhelper.close();
+    }
+
+    public User addUser(User u) {
+        ContentValues v = new ContentValues();
+        v.put(UserDB.colName, u.getuName());
+        v.put(UserDB.colGen, u.getuGender());
+        v.put(UserDB.colWeight, u.getuWeight());
+        long uID = db.insert(UserDB.TB_NAME, null, v);
+        u.setuID(uID);
+        return u;
+    }
+
+    public UserData addUData(UserData ud) {
+        ContentValues v = new ContentValues();
+        v.put(UserDB.colDist, ud.getwDist());
+        v.put(UserDB.colTime, ud.getwTime());
+        v.put(UserDB.colCalories, ud.getwCal());
+        v.put(UserDB.colDate, ud.getwDate());
+        db.insert(UserDB.TB_NAME_2, null, v);
+        return ud;
+    }
+
+
+
+}

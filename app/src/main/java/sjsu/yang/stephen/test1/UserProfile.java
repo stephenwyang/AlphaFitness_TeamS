@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.List;
+
 
 public class UserProfile extends FragmentActivity {
 
@@ -58,6 +60,8 @@ public class UserProfile extends FragmentActivity {
 
         uName = name.getText().toString();
         getUserInfo();
+        getWeekInfo();
+        getAllInfo();
 
     }
 
@@ -112,4 +116,73 @@ public class UserProfile extends FragmentActivity {
         DBop.updateUser(user);
     }
 
+    public void getWeekInfo() {
+        List<UserData> weekData = DBop.getWeekData();
+        float weekADist = 0;
+        float weekATime = 0;
+        float weekAWorkout = DBop.getNumWeekWorkout();
+        float weekACal = 0;
+        boolean temp = false;
+
+        for(UserData d: weekData) {
+            weekADist += d.getwDist();
+            weekATime += d.getwTime();
+            weekACal += d.getwCal();
+        }
+        if(weekAWorkout == 0) {
+            weekAWorkout = 1;
+            temp = true;
+        }
+        weekADist = weekADist / weekAWorkout;
+        weekATime = weekATime / weekAWorkout;
+        weekACal = weekACal / weekAWorkout;
+        if(temp) {
+            weekAWorkout = 0;
+        }
+
+        String time = convertTime((int) weekATime);
+
+        String distance = String.format(java.util.Locale.US,"%.2f",weekADist) + " miles";
+        String workouts = String.valueOf(weekAWorkout) + " times";
+        String calories = String.format(java.util.Locale.US,"%.2f",weekACal) + " calories";
+
+        weekDist.setText(distance);
+        weekTime.setText(time);
+        weekWorkout.setText(workouts);
+        weekCal.setText(calories);
+
+    }
+
+    public void getAllInfo() {
+        List<UserData> allData = DBop.getAllData();
+        float totalDist = 0;
+        float totalTime = 0;
+        float totalWorkouts = DBop.getTotalNumWorkout();
+        float totalCals = 0;
+
+        for(UserData d: allData) {
+            totalDist += d.getwDist();
+            totalTime += d.getwTime();
+            totalCals += d.getwCal();
+        }
+        String time = convertTime((int) totalTime);
+        String distance = String.format(java.util.Locale.US,"%.2f", totalDist) + " miles";
+        String workouts = String.valueOf(totalWorkouts) + " times";
+        String calories = String.format(java.util.Locale.US,"%.2f",totalCals) + " calories";
+
+        allDist.setText(distance);
+        allTime.setText(time);
+        totalWorkout.setText(workouts);
+        totalCal.setText(calories);
+
+    }
+
+    private String convertTime(int time) {
+       int sTime = time / 1000;
+       int min = (sTime % 3600) / 60;
+       int hour = sTime / (60 * 60);
+       int day = sTime / (60 * 60 * 24);
+       sTime = (sTime % 3600) % 60;
+       return day + " day(s) " + hour + " hr(s) " + min + " min(s) " + sTime + " sec ";
+    }
 }

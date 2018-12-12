@@ -2,12 +2,22 @@ package sjsu.yang.stephen.test1;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBOperations {
+    //Variables
     private final SQLiteOpenHelper dbhelper;
     private SQLiteDatabase db;
+
+
+    private static final String[] allUserCol = {
+            UserDB.colID,
+            UserDB.colName,
+            UserDB.colGen,
+            UserDB.colWeight
+    };
 
     public DBOperations(Context context) {
         dbhelper = new UserDB(context);
@@ -41,6 +51,23 @@ public class DBOperations {
         return ud;
     }
 
+    public User getUser(long id) {
+        Cursor c = db.query(UserDB.TB_NAME, allUserCol, UserDB.colID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+        if(c != null) {
+            c.moveToFirst();
+        }
+        assert c != null;
+        User u = new User(Long.parseLong(c.getString(0)), c.getString(1), c.getString(2), Float.parseFloat(c.getString(3)));
+        return u;
+    }
 
+    public void updateUser(User u) {
+        ContentValues v = new ContentValues();
+        v.put(UserDB.colName, u.getuName());
+        v.put(UserDB.colGen, u.getuGender());
+        v.put(UserDB.colWeight, u.getuWeight());
+        db.update(UserDB.TB_NAME, v, UserDB.colID + "=?", new String[] {String.valueOf(u.getuID())});
+        return;
+    }
 
 }

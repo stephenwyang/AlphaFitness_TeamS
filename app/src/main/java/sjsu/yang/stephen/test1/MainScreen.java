@@ -2,6 +2,10 @@ package sjsu.yang.stephen.test1;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -18,7 +22,7 @@ import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
-public class MainScreen extends AppCompatActivity implements OnMapReadyCallback {
+public class MainScreen extends AppCompatActivity implements OnMapReadyCallback, SensorEventListener {
 
     private GoogleMap gMap;
 
@@ -32,9 +36,18 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback 
 
     Handler h;
 
-    //Otter variables
+    //Other variables
     int s, m, ms;
     long msTime, startTime, timeBuff, updateTime = 0L;
+    private long steps;
+
+    //Database Stuff
+    DBOperations DBop;
+    private UserData ud;
+
+    //Sensors
+    SensorManager sManage;
+    Sensor stepSense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +60,10 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback 
         distanceView = (TextView) findViewById(R.id.distanceView);
 
         //Database stuff
+
+        ud = new UserData();
+        DBop = new DBOperations(this);
+
 
         //Switch to detail if you change the orientation
         /*
@@ -127,5 +144,25 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback 
             h.postDelayed(this, 0 );
         }
     };
+
+    @Override
+    public void onSensorChanged(SensorEvent e) {
+        Sensor sensor = e.sensor;
+        float[] values = e.values;
+        int value = -1;
+
+        if (values.length > 0) {
+            value = (int) values[0];
+        }
+
+
+        if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
+            steps+=1;
+        }
+    }
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        //We don't touch accuracy, no need to mess with it
+    }
 
 }

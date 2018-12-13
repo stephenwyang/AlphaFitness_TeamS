@@ -1,5 +1,6 @@
 package sjsu.yang.stephen.test1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -66,6 +67,10 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
         DBop = new DBOperations(this);
         DBop.open();
 
+        //Sensor for steps
+        sManage = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        stepSense = sManage.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+
 
         //Switch to detail if you change the orientation
         /*
@@ -123,6 +128,7 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
             ud.setwID(throwaway.getwID());
 
             h.postDelayed(updateDisTime, 0);
+            h.postDelayed(updateDB, 0);
 
 
         }
@@ -136,6 +142,7 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
 
             //Put the workout inside the DB, etc.
             h.removeCallbacks(updateDisTime);
+            h.removeCallbacks(updateDB);
         }
 
     }
@@ -151,7 +158,7 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
             s = s % 60;
             ms = (int) (updateTime % 1000);
             timeView.setText("" + m + ":" + String.format("%02d", s) + ":" + String.format("%03d", ms));
-            //distanceView.setText(String.format(java.util.Locale.US, "%.2f", getDistance()));
+            distanceView.setText(String.format(java.util.Locale.US, "%.2f", getDistance()));
             h.postDelayed(this, 0 );
         }
     };
@@ -159,7 +166,19 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
     //Runnable method to add data into the system
     private Runnable updateDB = new Runnable() {
         public void run() {
+            float calBurned = getCalories();
+            float workoutTime = SystemClock.uptimeMillis() - startTime;
+            float distance = getDistance();
+            ud.setwDist(distance);
+            ud.setwTime(workoutTime);
+            ud.setwCal(calBurned);
 
+            DBop.updateUData(ud);
+
+            h.postDelayed(this, 10000);
+            //Temp method: Just for the video
+            //Should be working otherwise
+            steps += 200;
         }
     };
 
@@ -179,6 +198,10 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
         return cal;
     }
 
+    //Method for finding distance
+    public float getDistance() {
+        return (float) (steps * 2.2) / 5280;
+    }
 
 
     @Override

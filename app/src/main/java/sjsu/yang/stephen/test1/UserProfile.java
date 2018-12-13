@@ -179,10 +179,12 @@ public class UserProfile extends FragmentActivity {
 
     private String convertTime(int time) {
        int sTime = time / 1000;
-       int min = (sTime % 3600) / 60;
+       int day = sTime / (24 * 60 * 60);
+       sTime = sTime - day * (24 * 60 * 60);
        int hour = sTime / (60 * 60);
-       int day = sTime / (60 * 60 * 24);
-       sTime = (sTime % 3600) % 60;
-       return day + " day(s) " + hour + " hr(s) " + min + " min(s) " + sTime + " sec ";
+       sTime = sTime - hour * (60 * 60);
+       int min = sTime / 60;
+       int seconds = sTime - min * 60;
+       return day + " day(s) " + hour + " hr(s) " + min + " min(s) " + seconds + " sec ";
     }
 }

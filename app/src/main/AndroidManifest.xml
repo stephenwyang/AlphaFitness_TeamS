@@ -4,8 +4,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-feature android:name="android.hardware.sensor.stepdetector" android:required="true"/>
 
+    <uses-feature
+        android:name="android.hardware.sensor.stepdetector"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -29,8 +31,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name = ".UserProfile" />
-
+        <activity android:name=".UserProfile" />
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

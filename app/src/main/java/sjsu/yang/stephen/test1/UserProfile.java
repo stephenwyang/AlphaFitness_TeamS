@@ -120,7 +120,7 @@ public class UserProfile extends FragmentActivity {
         List<UserData> weekData = DBop.getWeekData();
         float weekADist = 0;
         float weekATime = 0;
-        float weekAWorkout = DBop.getNumWeekWorkout();
+        int weekAWorkout = DBop.getNumWeekWorkout();
         float weekACal = 0;
         boolean temp = false;
 
@@ -157,7 +157,7 @@ public class UserProfile extends FragmentActivity {
         List<UserData> allData = DBop.getAllData();
         float totalDist = 0;
         float totalTime = 0;
-        float totalWorkouts = DBop.getTotalNumWorkout();
+        int totalWorkouts = DBop.getTotalNumWorkout();
         float totalCals = 0;
 
         for(UserData d: allData) {

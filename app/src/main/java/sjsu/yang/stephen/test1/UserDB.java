@@ -22,6 +22,7 @@ public class UserDB extends SQLiteOpenHelper {
     static final String colTime = "workTime";
     static final String colCalories = "workCalories";
     static final String colDate = "workoutDate";
+    static final String colwID = "wID";
 
     private static final String USER_TABLE = " CREATE TABLE " + TB_NAME + " " +
             "(" + colID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -29,7 +30,8 @@ public class UserDB extends SQLiteOpenHelper {
             + colGen + " TEXT, "
             + colWeight  + " NUMERIC" + ")";
     private static final String DATA_TABLE = " CREATE TABLE " + TB_NAME_2 + " " +
-            "(" + colDist + " NUMERIC, "
+            "(" + colwID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            colDist + " NUMERIC, "
             + colTime + " NUMERIC, "
             + colCalories + " NUMERIC, "
             + colDate + " NUMERIC" + ")";

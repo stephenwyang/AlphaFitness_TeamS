@@ -24,6 +24,7 @@ public class DBOperations {
     };
 
     private static final String[] allDataCol = {
+            UserDB.colwID,
             UserDB.colDist,
             UserDB.colTime,
             UserDB.colCalories,
@@ -58,8 +59,19 @@ public class DBOperations {
         v.put(UserDB.colTime, ud.getwTime());
         v.put(UserDB.colCalories, ud.getwCal());
         v.put(UserDB.colDate, ud.getwDate());
-        db.insert(UserDB.TB_NAME_2, null, v);
+        long wID = db.insert(UserDB.TB_NAME_2, null, v);
+        ud.setwID(wID);
         return ud;
+    }
+
+    public void updateUData(UserData ud) {
+        ContentValues v = new ContentValues();
+        v.put(UserDB.colDist, ud.getwDist());
+        v.put(UserDB.colTime, ud.getwTime());
+        v.put(UserDB.colCalories, ud.getwCal());
+        v.put(UserDB.colDate, ud.getwDate());
+        db.update(UserDB.TB_NAME_2,v,UserDB.colwID + "=?", new String[] {String.valueOf(ud.getwID())});
+        return;
     }
 
     public User getUser(long id) {

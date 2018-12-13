@@ -44,6 +44,7 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
     //Database Stuff
     DBOperations DBop;
     private UserData ud;
+    long workoutID = 0;
 
     //Sensors
     SensorManager sManage;
@@ -63,6 +64,7 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
 
         ud = new UserData();
         DBop = new DBOperations(this);
+        DBop.open();
 
 
         //Switch to detail if you change the orientation
@@ -111,6 +113,15 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
             //Get the beginning of the clock
             startTime = SystemClock.uptimeMillis();
 
+            //Create the userData and add it into
+            ud.setwID(100);
+            ud.setwDist(0);
+            ud.setwCal(0);
+            ud.setwTime(0);
+            ud.setwDate(startTime);
+            UserData throwaway = DBop.addUData(ud);
+            ud.setwID(throwaway.getwID());
+
             h.postDelayed(updateDisTime, 0);
 
 
@@ -144,6 +155,31 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
             h.postDelayed(this, 0 );
         }
     };
+
+    //Runnable method to add data into the system
+    private Runnable updateDB = new Runnable() {
+        public void run() {
+
+        }
+    };
+
+    //General calories burned per 2k steps is like .55 of your weight
+    public float getCalories() {
+        float cal = 0;
+        float weight;
+        try {
+            User u = DBop.getUser(1);
+            weight = u.getuWeight();
+        }
+        catch (Exception e) {
+            weight = 120;
+        }
+        cal = (float)(.55 * weight); //This is per 2k steps
+        cal = cal * steps / 2000; //This is total cal
+        return cal;
+    }
+
+
 
     @Override
     public void onSensorChanged(SensorEvent e) {

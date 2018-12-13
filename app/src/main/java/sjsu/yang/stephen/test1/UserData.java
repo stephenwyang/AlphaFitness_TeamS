@@ -5,6 +5,7 @@ public class UserData {
     private float wTime;
     private float wCal;
     private long wDate;
+    private long wID;
 
     public UserData(){
 
@@ -21,6 +22,8 @@ public class UserData {
     public long getwDate() {
         return wDate;
     }
+    public long getwID() {return wID;}
+
     public void setwDist(float f) {
         wDist = f;
     }
@@ -33,5 +36,6 @@ public class UserData {
     public void setwDate(long l) {
         wDate = l;
     }
+    public void setwID(long l) {wID = l;}
 
 }

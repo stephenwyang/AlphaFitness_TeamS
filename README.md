@@ -14,10 +14,10 @@
 
 ## Additional Information
 
-
 What else do you want to let your professor / TA know about this submission?
--Will crash first time boot, but if you allow permissions it shouldn't crash again
+-Will crash first time boot, but if you allow permissions it shouldn't crash again on second boot.
 -Didn't have time to show the tracking in real time, but I have a screenshot from previous tests that shows it working.
+-Updating the UI for profile screen didn't work, code should've been fine, but didn't reflect in application.
 
 # Self-Assessment for "Alpha Fitness"
 

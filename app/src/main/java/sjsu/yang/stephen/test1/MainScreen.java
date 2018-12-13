@@ -143,6 +143,8 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
             //Put the workout inside the DB, etc.
             h.removeCallbacks(updateDisTime);
             h.removeCallbacks(updateDB);
+            steps = 0;
+
         }
 
     }

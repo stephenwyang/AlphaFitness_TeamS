@@ -11,4 +11,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_user_profile">UserProfile</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_detail_view">DetailView</string>
+    <string name="title_activity_details_screen">DetailsScreen</string>
 </resources>

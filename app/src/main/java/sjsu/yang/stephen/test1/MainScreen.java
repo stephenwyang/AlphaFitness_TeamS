@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -102,12 +103,12 @@ public class MainScreen extends AppCompatActivity implements OnMapReadyCallback,
 
 
         //Switch to detail if you change the orientation
-        /*
+
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Intent intent = new Intent(this, detailActivity.class);
-            startActivity(this);
+            Intent intent = new Intent(this, DetailsScreen.class);
+            startActivity(intent);
         }
-         */
+
 
         //Initialize the others
         h = new Handler();

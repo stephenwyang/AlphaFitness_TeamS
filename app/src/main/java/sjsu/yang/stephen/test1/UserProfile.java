@@ -3,6 +3,7 @@ package sjsu.yang.stephen.test1;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -37,6 +38,8 @@ public class UserProfile extends FragmentActivity {
     int cID = 1;
     DBOperations DBop;
 
+    Handler h;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +65,14 @@ public class UserProfile extends FragmentActivity {
         getUserInfo();
         getWeekInfo();
         getAllInfo();
-
+        h = new Handler();
+        h.postDelayed(autoUpdate,0);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        h.removeCallbacks(autoUpdate);
         DBop.close();
     }
 
@@ -187,4 +192,12 @@ public class UserProfile extends FragmentActivity {
        int seconds = sTime - min * 60;
        return day + " day(s) " + hour + " hr(s) " + min + " min(s) " + seconds + " sec ";
     }
+
+    private Runnable autoUpdate = new Runnable() {
+        public void run() {
+            getWeekInfo();
+            getAllInfo();
+            h.postDelayed(this, 1000);
+        }
+    };
 }
